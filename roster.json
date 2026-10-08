@@ -1,11 +1,11 @@
 {
-  "rev": 2,
-  "updatedAt": "2026-10-08T10:32:01.711017Z",
+  "rev": 3,
+  "updatedAt": "2026-10-08T10:53:49.936Z",
   "updatedBy": "jordanliu1225",
   "event": {
-    "title": "20 人隊伍名單",
-    "time": "",
-    "note": ""
+    "title": "時間",
+    "time": "time",
+    "note": "T9 pve food"
   },
   "groups": [
     {
@@ -29,7 +29,7 @@
         {
           "weapon": "earthrune",
           "note": "Royal Armor",
-          "player": ""
+          "player": "9DD"
         }
       ]
     },
