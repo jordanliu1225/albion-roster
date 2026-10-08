@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>隊伍名單 · Albion</title>
+  <meta name="description" content="Albion Online 20 人隊伍配置與名單,自動同步,打開就是最新版。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="⚔ 20 人隊伍名單">
+  <meta property="og:description" content="Albion Online 隊伍配置與名單 · 自動同步,打開就是最新版">
+  <meta property="og:image" content="https://render.albiononline.com/v1/item/T8_2H_MACE.png?size=217">
+  <meta name="theme-color" content="#e0b866">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <div class="editbar" id="editbar" hidden>
+    <div class="wrap">
+      <span class="eb-label">✏️ 編輯模式</span>
+      <label class="eb-toggle"><input type="checkbox" id="compToggle"> 也編輯武器配置</label>
+      <span class="spacer"></span>
+      <button class="btn" id="pasteBtn" type="button">📥 貼上 Discord 名單</button>
+      <button class="btn danger" id="clearBtn" type="button">🧹 清空名字</button>
+      <button class="btn ghost" id="logoutBtn" type="button" title="清除這台電腦存的權杖">登出</button>
+      <button class="btn ghost" id="cancelBtn" type="button">取消</button>
+      <button class="btn primary" id="saveBtn" type="button">💾 儲存並同步</button>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="kicker">Albion Online · 20-Man Roster</div>
+      <h1 id="title">隊伍名單</h1>
+      <div class="event-meta" id="eventMeta" hidden></div>
+      <div class="event-edit" id="eventEdit" hidden>
+        <label><span>標題</span><input class="inp" id="evTitle" maxlength="60"></label>
+        <label><span>時間</span><input class="inp" id="evTime" maxlength="60" placeholder="例:10/12(日)21:00 集合"></label>
+        <label><span>公告</span><input class="inp" id="evNote" maxlength="120" placeholder="例:語音 #zvz-1,全員 T8 裝備"></label>
+      </div>
+      <div class="overview">
+        <div class="fill">
+          <span class="fill-num" id="filledNum">0</span>
+          <span class="fill-of">/ <span id="totalNum">20</span></span>
+          <span class="fill-label">已就位</span>
+        </div>
+        <div class="segbar" id="segbar" aria-hidden="true"></div>
+        <div class="legend" id="legend"></div>
+        <div class="live" id="live"><span class="dot"></span><span id="liveText">載入中…</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap toolbar">
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="search" type="search" placeholder="輸入你的名字,找你的位置" autocomplete="off" spellcheck="false" aria-label="搜尋名字">
+    </div>
+    <div class="search-result" id="searchResult" aria-live="polite"></div>
+    <span class="spacer"></span>
+    <button class="btn" id="copyBtn" type="button">📋 複製 Discord 格式</button>
+    <button class="btn ghost" id="editBtn" type="button">🔒 隊長編輯</button>
+  </div>
+
+  <main class="wrap board" id="board"><div class="loading">載入名單中…</div></main>
+
+  <footer class="wrap foot">
+    名單存放在 GitHub · 頁面每 15 秒自動檢查更新,不用重新整理
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="loginDlg">
+    <form id="loginForm">
+      <h2>🔒 隊長登入</h2>
+      <p class="dlg-sub">只有負責排名單的人需要登入,其他人打開網頁就會看到即時名單。</p>
+      <ol>
+        <li>開啟 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub 建立權杖頁面</a>(Fine-grained token)</li>
+        <li>Repository access 選 <b>Only select repositories</b> → 勾 <b class="repo-name">albion-roster</b></li>
+        <li>Permissions → Repository permissions → <b>Contents</b> 設為 <b>Read and write</b></li>
+        <li>按 Generate token,把產生的權杖貼到下面</li>
+      </ol>
+      <input class="inp" id="tokenInput" type="password" placeholder="github_pat_…" autocomplete="off" spellcheck="false">
+      <p class="dlg-note">權杖只存在這台電腦的瀏覽器裡,只用來把名單寫進 GitHub。</p>
+      <p class="dlg-msg" id="loginMsg"></p>
+      <div class="dlg-actions">
+        <button class="btn ghost" type="button" data-close>取消</button>
+        <button class="btn primary" type="submit" id="loginSubmit">登入並開始編輯</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="pasteDlg">
+    <form id="pasteForm">
+      <h2>📥 貼上 Discord 名單</h2>
+      <p class="dlg-sub">直接貼上 Discord 那份「武器 - @名字」清單,會照順序填進每個位置;也可以一行一個名字。</p>
+      <textarea class="inp" id="pasteInput" spellcheck="false"></textarea>
+      <p class="dlg-msg" id="pasteMsg"></p>
+      <div class="dlg-actions">
+        <button class="btn ghost" type="button" data-close>取消</button>
+        <button class="btn primary" type="submit">填入名字</button>
+      </div>
+    </form>
+  </dialog>
+
+  <noscript><p class="wrap">這個頁面需要啟用 JavaScript 才能顯示名單。</p></noscript>
+  <script src="app.js"></script>
+</body>
+</html>

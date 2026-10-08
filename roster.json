@@ -1,0 +1,52 @@
+{
+  "rev": 1,
+  "updatedAt": "2026-10-08T10:30:00.000Z",
+  "updatedBy": "jordanliu1225",
+  "event": {
+    "title": "20 人隊伍名單",
+    "time": "",
+    "note": ""
+  },
+  "groups": [
+    {
+      "role": "tank",
+      "slots": [
+        { "weapon": "heavy mace", "note": "bring incubus", "player": "" },
+        { "weapon": "heavy mace", "note": "bring incubus", "player": "" },
+        { "weapon": "hammer", "note": "", "player": "" },
+        { "weapon": "earthrune", "note": "Royal Armor", "player": "" }
+      ]
+    },
+    {
+      "role": "dps",
+      "slots": [
+        { "weapon": "forge hammer", "note": "bring pve weapon", "player": "" },
+        { "weapon": "melee", "note": "", "player": "" },
+        { "weapon": "lightcaller", "note": "", "player": "" },
+        { "weapon": "lightcaller", "note": "", "player": "" },
+        { "weapon": "lightcaller", "note": "", "player": "" },
+        { "weapon": "dawnsong", "note": "", "player": "" },
+        { "weapon": "Gloves", "note": "", "player": "" },
+        { "weapon": "shadowcaller", "note": "", "player": "" }
+      ]
+    },
+    {
+      "role": "support",
+      "slots": [
+        { "weapon": "Rootbound", "note": "Royal Armor bring occu", "player": "" },
+        { "weapon": "oath", "note": "royal jacket bring pve weapon", "player": "" },
+        { "weapon": "evensong", "note": "bring occu", "player": "" },
+        { "weapon": "GA", "note": "", "player": "" }
+      ]
+    },
+    {
+      "role": "healer",
+      "slots": [
+        { "weapon": "Redemption", "note": "bring Royal robe", "player": "" },
+        { "weapon": "Redemption", "note": "bring Royal robe", "player": "" },
+        { "weapon": "Fallen", "note": "bring Royal robe", "player": "" },
+        { "weapon": "blight", "note": "bring pve weapon", "player": "" }
+      ]
+    }
+  ]
+}
